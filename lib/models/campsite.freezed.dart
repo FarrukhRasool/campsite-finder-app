@@ -21,31 +21,14 @@ Campsite _$CampsiteFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Campsite {
-  /// Unique identifier for the campsite
   String get id => throw _privateConstructorUsedError;
-
-  /// Name of the campsite
   String get label => throw _privateConstructorUsedError;
-
-  /// Geographical location of the campsite
   GeoLocation get geoLocation => throw _privateConstructorUsedError;
-
-  /// Whether the campsite is close to water
   bool get isCloseToWater => throw _privateConstructorUsedError;
-
-  /// Whether campfires are allowed at the campsite
   bool get isCampFireAllowed => throw _privateConstructorUsedError;
-
-  /// List of languages spoken by the host
   List<String> get hostLanguages => throw _privateConstructorUsedError;
-
-  /// Price per night in euros
   double get pricePerNight => throw _privateConstructorUsedError;
-
-  /// URL of the campsite's photo
   String get photo => throw _privateConstructorUsedError;
-
-  /// List of features the campsite is suitable for
   List<String> get suitableFor => throw _privateConstructorUsedError;
 
   /// Serializes this Campsite to a JSON map.
@@ -251,7 +234,7 @@ class __$$CampsiteImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CampsiteImpl extends _Campsite {
+class _$CampsiteImpl implements _Campsite {
   const _$CampsiteImpl({
     required this.id,
     required this.label,
@@ -263,36 +246,22 @@ class _$CampsiteImpl extends _Campsite {
     required this.photo,
     final List<String> suitableFor = const [],
   }) : _hostLanguages = hostLanguages,
-       _suitableFor = suitableFor,
-       super._();
+       _suitableFor = suitableFor;
 
   factory _$CampsiteImpl.fromJson(Map<String, dynamic> json) =>
       _$$CampsiteImplFromJson(json);
 
-  /// Unique identifier for the campsite
   @override
   final String id;
-
-  /// Name of the campsite
   @override
   final String label;
-
-  /// Geographical location of the campsite
   @override
   final GeoLocation geoLocation;
-
-  /// Whether the campsite is close to water
   @override
   final bool isCloseToWater;
-
-  /// Whether campfires are allowed at the campsite
   @override
   final bool isCampFireAllowed;
-
-  /// List of languages spoken by the host
   final List<String> _hostLanguages;
-
-  /// List of languages spoken by the host
   @override
   List<String> get hostLanguages {
     if (_hostLanguages is EqualUnmodifiableListView) return _hostLanguages;
@@ -300,18 +269,11 @@ class _$CampsiteImpl extends _Campsite {
     return EqualUnmodifiableListView(_hostLanguages);
   }
 
-  /// Price per night in euros
   @override
   final double pricePerNight;
-
-  /// URL of the campsite's photo
   @override
   final String photo;
-
-  /// List of features the campsite is suitable for
   final List<String> _suitableFor;
-
-  /// List of features the campsite is suitable for
   @override
   @JsonKey()
   List<String> get suitableFor {
@@ -380,7 +342,7 @@ class _$CampsiteImpl extends _Campsite {
   }
 }
 
-abstract class _Campsite extends Campsite {
+abstract class _Campsite implements Campsite {
   const factory _Campsite({
     required final String id,
     required final String label,
@@ -392,44 +354,26 @@ abstract class _Campsite extends Campsite {
     required final String photo,
     final List<String> suitableFor,
   }) = _$CampsiteImpl;
-  const _Campsite._() : super._();
 
   factory _Campsite.fromJson(Map<String, dynamic> json) =
       _$CampsiteImpl.fromJson;
 
-  /// Unique identifier for the campsite
   @override
   String get id;
-
-  /// Name of the campsite
   @override
   String get label;
-
-  /// Geographical location of the campsite
   @override
   GeoLocation get geoLocation;
-
-  /// Whether the campsite is close to water
   @override
   bool get isCloseToWater;
-
-  /// Whether campfires are allowed at the campsite
   @override
   bool get isCampFireAllowed;
-
-  /// List of languages spoken by the host
   @override
   List<String> get hostLanguages;
-
-  /// Price per night in euros
   @override
   double get pricePerNight;
-
-  /// URL of the campsite's photo
   @override
   String get photo;
-
-  /// List of features the campsite is suitable for
   @override
   List<String> get suitableFor;
 
@@ -447,10 +391,7 @@ GeoLocation _$GeoLocationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GeoLocation {
-  /// Latitude coordinate
   double get lat => throw _privateConstructorUsedError;
-
-  /// Longitude coordinate
   @JsonKey(name: 'long')
   double get lng => throw _privateConstructorUsedError;
 
@@ -548,20 +489,17 @@ class __$$GeoLocationImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GeoLocationImpl extends _GeoLocation {
+class _$GeoLocationImpl implements _GeoLocation {
   const _$GeoLocationImpl({
     required this.lat,
     @JsonKey(name: 'long') required this.lng,
-  }) : super._();
+  });
 
   factory _$GeoLocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$GeoLocationImplFromJson(json);
 
-  /// Latitude coordinate
   @override
   final double lat;
-
-  /// Longitude coordinate
   @override
   @JsonKey(name: 'long')
   final double lng;
@@ -598,21 +536,17 @@ class _$GeoLocationImpl extends _GeoLocation {
   }
 }
 
-abstract class _GeoLocation extends GeoLocation {
+abstract class _GeoLocation implements GeoLocation {
   const factory _GeoLocation({
     required final double lat,
     @JsonKey(name: 'long') required final double lng,
   }) = _$GeoLocationImpl;
-  const _GeoLocation._() : super._();
 
   factory _GeoLocation.fromJson(Map<String, dynamic> json) =
       _$GeoLocationImpl.fromJson;
 
-  /// Latitude coordinate
   @override
   double get lat;
-
-  /// Longitude coordinate
   @override
   @JsonKey(name: 'long')
   double get lng;

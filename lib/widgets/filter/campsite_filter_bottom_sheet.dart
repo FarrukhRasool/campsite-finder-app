@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../providers/filter/filter_provider.dart';
-import '../../providers/filter/filter_model.dart';
+import '../providers/campsite_provider.dart';
 import '../common/price_box.dart';
-import '../../resources/text_styles.dart';
-import '../../resources/constants.dart';
-import '../../resources/colors.dart';
+import '../resources/text_styles.dart';
+import '../constants.dart';
+import '../resources/colors.dart';
 
 class CampsiteFilterBottomSheet extends ConsumerWidget {
   final CampsiteFilters filters;

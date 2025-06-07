@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/campsite.dart';
 import '../resources/text_styles.dart';
-import '../resources/constants.dart';
+import '../constants.dart';
 import '../resources/colors.dart';
 
 class CampsiteCard extends StatelessWidget {

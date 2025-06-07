@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/campsite/filtered_campsites_provider.dart';
-import '../providers/filter/filter_provider.dart';
-import '../providers/filter/filter_model.dart';
+import '../providers/campsite_provider.dart';
 import '../models/campsite.dart';
-import '../widgets/campsite/campsite_card.dart';
+import '../widgets/campsite_card.dart';
 import 'campsite_detail_screen.dart';
 import 'package:flutter/services.dart';
-import '../widgets/common/price_box.dart';
-import '../widgets/filter/campsite_filter_bottom_sheet.dart';
+import '../widgets/price_box.dart';
+import '../widgets/campsite_filter_bottom_sheet.dart';
 import '../resources/colors.dart';
-import '../resources/constants.dart';
+import '../constants.dart';
 
 const availableLanguages = [
   {'code': 'en', 'label': 'English'},
