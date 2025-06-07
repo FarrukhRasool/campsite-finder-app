@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import '../widgets/price_box.dart';
 import '../widgets/campsite_filter_bottom_sheet.dart';
 import '../resources/colors.dart';
-import '../constants.dart';
+import '../resources/constants.dart';
 
 const availableLanguages = [
   {'code': 'en', 'label': 'English'},

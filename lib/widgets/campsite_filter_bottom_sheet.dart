@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/campsite_provider.dart';
 import 'price_box.dart';
 import '../resources/text_styles.dart';
-import '../constants.dart';
+import '../resources/constants.dart';
 import '../resources/colors.dart';
 
 class CampsiteFilterBottomSheet extends ConsumerWidget {
