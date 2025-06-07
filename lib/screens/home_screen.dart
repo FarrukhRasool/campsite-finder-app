@@ -210,7 +210,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF232323),
+        backgroundColor: darkGreen,
         leading: IconButton(
           icon: const Icon(Icons.filter_list),
           onPressed: () => _showFilterBottomSheet(context, ref, filters),
