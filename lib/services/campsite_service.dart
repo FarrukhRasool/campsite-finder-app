@@ -14,7 +14,13 @@ class CampsiteService {
       
       if (response.statusCode == 200) {
         final List<dynamic> jsonList = json.decode(response.body);
-        return jsonList.map((json) => Campsite.fromJson(json)).toList();
+        final List<Campsite> campsites = jsonList.map((json) => Campsite.fromJson(json)).toList();
+        campsites.sort((a, b) {
+          final aLabel = (a.label ?? '').toLowerCase();
+          final bLabel = (b.label ?? '').toLowerCase();
+          return aLabel.compareTo(bLabel);
+        });
+        return campsites;
       } else {
         throw Exception('Failed to load campsites: ${response.statusCode}');
       }

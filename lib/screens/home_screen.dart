@@ -11,6 +11,8 @@ const availableLanguages = [
   {'code': 'de', 'label': 'German'},
 ];
 
+const darkGreen = Color(0xFF207A3D);
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -55,13 +57,25 @@ class HomeScreen extends ConsumerWidget {
               builder: (context, ref, child) {
                 final currentFilters = ref.watch(campsiteFiltersProvider);
                 final selectedLanguages = currentFilters.speakingLanguages ?? [];
+                final minSlider = 0.0;
+                final sliderMax = 100000.0;
+                final selectedMin = currentFilters.minPrice ?? minSlider;
+                final selectedMax = currentFilters.maxPrice ?? sliderMax;
                 return Column(
                   children: [
                     SizedBox(
                       width: double.infinity,
                       child: SwitchListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text('Close to Water', style: TextStyle(fontFamily: 'Arial')),
+                        title: Text(
+                          'Close to Water',
+                          style: TextStyle(
+                            fontFamily: 'Arial',
+                            fontSize: 16,
+                            color: darkGreen,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                         value: currentFilters.isCloseToWater ?? false,
                         onChanged: (value) {
                           ref.read(campsiteFiltersProvider.notifier).state =
@@ -74,7 +88,15 @@ class HomeScreen extends ConsumerWidget {
                       width: double.infinity,
                       child: SwitchListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text('Camp Fire Allowed', style: TextStyle(fontFamily: 'Arial')),
+                        title: Text(
+                          'Camp Fire Allowed',
+                          style: TextStyle(
+                            fontFamily: 'Arial',
+                            fontSize: 16,
+                            color: darkGreen,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                         value: currentFilters.isCampFireAllowed ?? false,
                         onChanged: (value) {
                           ref.read(campsiteFiltersProvider.notifier).state =
@@ -83,27 +105,37 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    TextField(
-                      decoration: const InputDecoration(
-                        labelText: 'Enter Max Price per Night',
-                        labelStyle: TextStyle(fontFamily: 'Arial', color: Color(0xFFCCCCCC)),
-                        prefixText: '€ ',
-                        prefixStyle: TextStyle(fontFamily: 'Arial', color: Color(0xFFCCCCCC)),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFCCCCCC)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFCCCCCC)),
+                    
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Price Range',
+                        style: TextStyle(
+                          fontFamily: 'Arial',
+                          fontSize: 16,
+                          color: darkGreen,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      style: const TextStyle(fontFamily: 'Arial', color: Color(0xFF232323)),
-                      onChanged: (value) {
-                        final price = double.tryParse(value);
+                    ),
+                    RangeSlider(
+                      min: minSlider,
+                      max: sliderMax,
+                      values: RangeValues(selectedMin, selectedMax),
+                      divisions: ((sliderMax - minSlider) ~/ 1000),
+                      onChanged: (values) {
                         ref.read(campsiteFiltersProvider.notifier).state =
-                            currentFilters.copyWith(maxPrice: price);
+                            currentFilters.copyWith(minPrice: values.start, maxPrice: values.end);
                       },
+                      activeColor: darkGreen,
+                      inactiveColor: Colors.grey[300],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _PriceBox(label: 'Min.', value: selectedMin.toStringAsFixed(0)),
+                        _PriceBox(label: 'Max.', value: selectedMax.toStringAsFixed(0)),
+                      ],
                     ),
                     const SizedBox(height: 16),
                     Align(
@@ -113,31 +145,35 @@ class HomeScreen extends ConsumerWidget {
                         style: TextStyle(
                           fontFamily: 'Arial',
                           fontSize: 16,
+                          color: darkGreen,
                           fontWeight: FontWeight.normal,
-                          color: Color(0xFF232323),
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Wrap(
-                      spacing: 8,
-                      children: [
-                        for (final lang in availableLanguages)
-                          FilterChip(
-                            label: Text(lang['label']!, style: const TextStyle(fontFamily: 'Arial')),
-                            selected: selectedLanguages.contains(lang['code']),
-                            onSelected: (selected) {
-                              final newList = List<String>.from(selectedLanguages);
-                              if (selected) {
-                                newList.add(lang['code']!);
-                              } else {
-                                newList.remove(lang['code']);
-                              }
-                              ref.read(campsiteFiltersProvider.notifier).state =
-                                  currentFilters.copyWith(speakingLanguages: newList);
-                            },
-                          ),
-                      ],
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: 8,
+                        children: [
+                          for (final lang in availableLanguages)
+                            FilterChip(
+                              label: Text(lang['label']!, style: const TextStyle(fontFamily: 'Arial')),
+                              selected: selectedLanguages.contains(lang['code']),
+                              onSelected: (selected) {
+                                final newList = List<String>.from(selectedLanguages);
+                                if (selected) {
+                                  newList.add(lang['code']!);
+                                } else {
+                                  newList.remove(lang['code']);
+                                }
+                                ref.read(campsiteFiltersProvider.notifier).state =
+                                    currentFilters.copyWith(speakingLanguages: newList);
+                              },
+                            ),
+                        ],
+                      ),
                     ),
                   ],
                 );
@@ -227,6 +263,47 @@ class HomeScreen extends ConsumerWidget {
                   );
                 },
               ),
+      ),
+    );
+  }
+}
+
+class _PriceBox extends StatelessWidget {
+  final String label;
+  final String value;
+  const _PriceBox({required this.label, required this.value});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[400]!),
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.transparent,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontFamily: 'Arial',
+              fontSize: 14,
+              color: Color(0xFFCCCCCC),
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            value,
+            style: const TextStyle(
+              fontFamily: 'Arial',
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }

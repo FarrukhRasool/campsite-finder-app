@@ -24,6 +24,9 @@ final filteredCampsitesProvider = Provider<List<Campsite>>((ref) {
         if (filters.isCampFireAllowed == true && campsite.isCampFireAllowed != true) {
           return false;
         }
+        if (filters.minPrice != null && campsite.pricePerNight != null && campsite.pricePerNight! < filters.minPrice!) {
+          return false;
+        }
         if (filters.maxPrice != null && campsite.pricePerNight != null && campsite.pricePerNight! > filters.maxPrice!) {
           return false;
         }
@@ -44,12 +47,14 @@ class CampsiteFilters {
   final bool? isCloseToWater;
   final bool? isCampFireAllowed;
   final double? maxPrice;
+  final double? minPrice;
   final List<String>? speakingLanguages;
 
   CampsiteFilters({
     this.isCloseToWater,
     this.isCampFireAllowed,
     this.maxPrice,
+    this.minPrice,
     this.speakingLanguages,
   });
 
@@ -57,12 +62,14 @@ class CampsiteFilters {
     bool? isCloseToWater,
     bool? isCampFireAllowed,
     double? maxPrice,
+    double? minPrice,
     List<String>? speakingLanguages,
   }) {
     return CampsiteFilters(
       isCloseToWater: isCloseToWater ?? this.isCloseToWater,
       isCampFireAllowed: isCampFireAllowed ?? this.isCampFireAllowed,
       maxPrice: maxPrice ?? this.maxPrice,
+      minPrice: minPrice ?? this.minPrice,
       speakingLanguages: speakingLanguages ?? this.speakingLanguages,
     );
   }
