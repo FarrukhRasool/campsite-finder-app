@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/campsite.dart';
+import '../resources/text_styles.dart';
+import '../resources/constants.dart';
+import '../resources/colors.dart';
 
 class CampsiteCard extends StatelessWidget {
   final Campsite campsite;
@@ -41,7 +44,7 @@ class CampsiteCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 2),
           child: Text(
             e.toString(),
-            style: const TextStyle(fontFamily: 'Arial', fontSize: 16, color: Color(0xFF595959)),
+            style: labelStyle,
           ),
         );
       }
@@ -50,15 +53,15 @@ class CampsiteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final languages = _parseLanguages(campsite.hostLanguages);
+    final languages = _buildLanguageWidgets(campsite.hostLanguages);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white, // Card background color
+        color: white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
+            color: grey300.withOpacity(0.15),
             blurRadius: 24,
             spreadRadius: 4,
             offset: const Offset(0, 8),
@@ -66,11 +69,11 @@ class CampsiteCard extends StatelessWidget {
         ],
       ),
       child: Card(
-        color: Colors.transparent, // Make Card itself transparent
+        color: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        elevation: 0, // Remove default shadow
+        elevation: 0,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: onTap,
@@ -87,8 +90,8 @@ class CampsiteCard extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   errorBuilder: (context, error, stackTrace) => Container(
                     height: 180,
-                    color: Colors.grey[300],
-                    child: const Icon(Icons.image, size: 60, color: Colors.grey),
+                    color: lightGrey,
+                    child: const Icon(Icons.image, size: 60, color: grey300),
                   ),
                 ),
               ),
@@ -101,12 +104,7 @@ class CampsiteCard extends StatelessWidget {
                       (campsite.label ?? '').isNotEmpty
                           ? campsite.label![0].toUpperCase() + campsite.label!.substring(1)
                           : '',
-                      style: const TextStyle(
-                        fontFamily: 'Arial',
-                        fontSize: 20,
-                        color: Color(0xFF373737),
-                        fontWeight: FontWeight.normal,
-                      ),
+                      style: headingStyle.copyWith(fontSize: 20, fontWeight: FontWeight.normal),
                     ),
                     const SizedBox(height: 8),
                     if (campsite.pricePerNight != null)
@@ -115,22 +113,12 @@ class CampsiteCard extends StatelessWidget {
                         children: [
                           Text(
                             '€${formatPrice(campsite.pricePerNight!)}',
-                            style: const TextStyle(
-                              fontFamily: 'Arial',
-                              fontSize: 18,
-                              color: Color(0xFF373737),
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: headingStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold, color: black),
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Text(
                             '/night',
-                            style: const TextStyle(
-                              fontFamily: 'Arial',
-                              fontSize: 16,
-                              color: Color(0xFF373737),
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style: labelStyle.copyWith(fontSize: 16, color: black),
                           ),
                         ],
                       ),
@@ -140,12 +128,8 @@ class CampsiteCard extends StatelessWidget {
                         const Icon(Icons.water, size: 18, color: Colors.blue),
                         const SizedBox(width: 6),
                         Text(
-                          campsite.isCloseToWater == true ? 'Near Water' : 'Not Near Water',
-                          style: const TextStyle(
-                            fontFamily: 'Arial',
-                            fontSize: 14,
-                            color: Color(0xFF595959),
-                          ),
+                          campsite.isCloseToWater == true ? closeToWaterTitle : 'Not Near Water',
+                          style: labelStyle.copyWith(fontSize: 14, color: black),
                         ),
                       ],
                     ),
@@ -155,23 +139,19 @@ class CampsiteCard extends StatelessWidget {
                         const Icon(Icons.local_fire_department, size: 18, color: Colors.orange),
                         const SizedBox(width: 6),
                         Text(
-                          campsite.isCampFireAllowed == true ? 'Campfire Allowed' : 'No Campfire',
-                          style: const TextStyle(
-                            fontFamily: 'Arial',
-                            fontSize: 14,
-                            color: Color(0xFF595959),
-                          ),
+                          campsite.isCampFireAllowed == true ? campFireAllowedTitle : 'No Campfire',
+                          style: labelStyle.copyWith(fontSize: 14, color: black),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    if (campsite.hostLanguages != null && campsite.hostLanguages!.isNotEmpty)
+                    if (languages.isNotEmpty)
                       Row(
                         children: [
                           const Icon(Icons.language, size: 18, color: Colors.purple),
                           const SizedBox(width: 6),
-                          const Text('Language: ', style: TextStyle(fontFamily: 'Arial', fontSize: 14, color: Color(0xFF595959))),
-                          ..._buildLanguageWidgets(campsite.hostLanguages),
+                          const Text(speakingLanguageTitle, style: labelStyle),
+                          ...languages,
                         ],
                       ),
                     if (campsite.suitableFor != null && campsite.suitableFor!.isNotEmpty)
@@ -184,7 +164,7 @@ class CampsiteCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 'Suitable for: ${campsite.suitableFor!.join(", ")}',
-                                style: const TextStyle(fontSize: 14),
+                                style: labelStyle.copyWith(fontSize: 14, color: black),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
