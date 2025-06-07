@@ -5,6 +5,8 @@ import '../models/campsite.dart';
 import '../widgets/campsite_card.dart';
 import 'campsite_detail_screen.dart';
 import 'package:flutter/services.dart';
+import '../widgets/price_box.dart';
+import '../widgets/campsite_filter_bottom_sheet.dart';
 
 const availableLanguages = [
   {'code': 'en', 'label': 'English'},
@@ -24,181 +26,10 @@ class HomeScreen extends ConsumerWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          left: 16,
-          right: 16,
-          top: 16,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Filter Campsites',
-                  style: TextStyle(
-                    fontFamily: 'Arial',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Consumer(
-              builder: (context, ref, child) {
-                final currentFilters = ref.watch(campsiteFiltersProvider);
-                final selectedLanguages = currentFilters.speakingLanguages ?? [];
-                final minSlider = 0.0;
-                final sliderMax = 100000.0;
-                final selectedMin = currentFilters.minPrice ?? minSlider;
-                final selectedMax = currentFilters.maxPrice ?? sliderMax;
-                return Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: SwitchListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          'Close to Water',
-                          style: TextStyle(
-                            fontFamily: 'Arial',
-                            fontSize: 16,
-                            color: darkGreen,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        value: currentFilters.isCloseToWater ?? false,
-                        onChanged: (value) {
-                          ref.read(campsiteFiltersProvider.notifier).state =
-                              currentFilters.copyWith(isCloseToWater: value);
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    SizedBox(
-                      width: double.infinity,
-                      child: SwitchListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          'Camp Fire Allowed',
-                          style: TextStyle(
-                            fontFamily: 'Arial',
-                            fontSize: 16,
-                            color: darkGreen,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        value: currentFilters.isCampFireAllowed ?? false,
-                        onChanged: (value) {
-                          ref.read(campsiteFiltersProvider.notifier).state =
-                              currentFilters.copyWith(isCampFireAllowed: value);
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Price Range',
-                        style: TextStyle(
-                          fontFamily: 'Arial',
-                          fontSize: 16,
-                          color: darkGreen,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                    RangeSlider(
-                      min: minSlider,
-                      max: sliderMax,
-                      values: RangeValues(selectedMin, selectedMax),
-                      divisions: ((sliderMax - minSlider) ~/ 1000),
-                      onChanged: (values) {
-                        ref.read(campsiteFiltersProvider.notifier).state =
-                            currentFilters.copyWith(minPrice: values.start, maxPrice: values.end);
-                      },
-                      activeColor: darkGreen,
-                      inactiveColor: Colors.grey[300],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _PriceBox(label: 'Min.', value: selectedMin.toStringAsFixed(0)),
-                        _PriceBox(label: 'Max.', value: selectedMax.toStringAsFixed(0)),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Speaking Language',
-                        style: TextStyle(
-                          fontFamily: 'Arial',
-                          fontSize: 16,
-                          color: darkGreen,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Wrap(
-                        alignment: WrapAlignment.start,
-                        spacing: 8,
-                        children: [
-                          for (final lang in availableLanguages)
-                            FilterChip(
-                              label: Text(lang['label']!, style: const TextStyle(fontFamily: 'Arial')),
-                              selected: selectedLanguages.contains(lang['code']),
-                              onSelected: (selected) {
-                                final newList = List<String>.from(selectedLanguages);
-                                if (selected) {
-                                  newList.add(lang['code']!);
-                                } else {
-                                  newList.remove(lang['code']);
-                                }
-                                ref.read(campsiteFiltersProvider.notifier).state =
-                                    currentFilters.copyWith(speakingLanguages: newList);
-                              },
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                ),
-                onPressed: () {
-                  ref.read(campsiteFiltersProvider.notifier).state = CampsiteFilters();
-                  Navigator.pop(context);
-                },
-                child: const Text('Reset Filters', style: TextStyle(fontFamily: 'Arial', fontSize: 16)),
-              ),
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
+      builder: (context) => CampsiteFilterBottomSheet(
+        filters: filters,
+        darkGreen: darkGreen,
+        availableLanguages: availableLanguages,
       ),
     );
   }
@@ -263,47 +94,6 @@ class HomeScreen extends ConsumerWidget {
                   );
                 },
               ),
-      ),
-    );
-  }
-}
-
-class _PriceBox extends StatelessWidget {
-  final String label;
-  final String value;
-  const _PriceBox({required this.label, required this.value});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[400]!),
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.transparent,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontFamily: 'Arial',
-              fontSize: 14,
-              color: Color(0xFFCCCCCC),
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            value,
-            style: const TextStyle(
-              fontFamily: 'Arial',
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }
