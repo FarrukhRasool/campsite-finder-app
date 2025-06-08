@@ -21,9 +21,16 @@ const TextStyle labelStyle = TextStyle(
   color: grey300,
 );
 
+const TextStyle blacklabelStyle = TextStyle(
+  fontFamily: 'Arial',
+  fontSize: 14,
+  color: black,
+);
+
 const TextStyle valueStyle = TextStyle(
   fontFamily: 'Arial',
   fontSize: 16,
   color: black,
   fontWeight: FontWeight.w600,
-); 
+);
+

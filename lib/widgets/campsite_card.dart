@@ -3,6 +3,7 @@ import '../models/campsite.dart';
 import '../resources/text_styles.dart';
 import '../resources/constants.dart';
 import '../resources/colors.dart';
+import '../utils/number_formatter.dart';
 
 class CampsiteCard extends StatelessWidget {
   final Campsite campsite;
@@ -13,20 +14,6 @@ class CampsiteCard extends StatelessWidget {
     required this.campsite,
     this.onTap,
   }) : super(key: key);
-
-  String formatPrice(num price) {
-    final str = price.toStringAsFixed(0);
-    final buffer = StringBuffer();
-    int count = 0;
-    for (int i = str.length - 1; i >= 0; i--) {
-      buffer.write(str[i]);
-      count++;
-      if (count % 3 == 0 && i != 0) {
-        buffer.write('.');
-      }
-    }
-    return buffer.toString().split('').reversed.join();
-  }
 
   List<Language> _parseLanguages(List<dynamic>? langs) {
     if (langs == null) return [];
@@ -112,7 +99,7 @@ class CampsiteCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '€${formatPrice(campsite.pricePerNight!)}',
+                            '€${NumberFormatter.formatPrice(campsite.pricePerNight!)}',
                             style: headingStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold, color: black),
                           ),
                           const SizedBox(width: 4),

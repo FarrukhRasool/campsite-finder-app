@@ -41,18 +41,15 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: darkGreen,
         leading: IconButton(
           icon: const Icon(Icons.filter_list),
           onPressed: () => _showFilterBottomSheet(context, ref, filters),
-          color: white,
         ),
         title: const Text(
           campsitesAppBarTitle,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: white,
           ),
         ),
       ),
