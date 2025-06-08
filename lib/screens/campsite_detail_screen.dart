@@ -178,7 +178,7 @@ class CampsiteDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Location',
-                style: sectionHeadingStyle.copyWith(fontSize: 18),
+                style: sectionHeadingStyle,
               ),
             ),
             const SizedBox(height: 8),

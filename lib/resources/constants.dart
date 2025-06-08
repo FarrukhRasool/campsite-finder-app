@@ -8,3 +8,5 @@ const String resetFiltersLabel = 'Reset Filters';
 const String minLabel = 'Min.';
 const String maxLabel = 'Max.';
 const String campsitesAppBarTitle = 'Campsites'; 
+const String notNearWaterTitle = 'Not Near Water';
+const String noCampfireTitle = 'No Campfire';
