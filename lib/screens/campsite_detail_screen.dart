@@ -5,8 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../models/campsite.dart';
 import '../resources/colors.dart';
 import '../resources/text_styles.dart';
-import '../resources/constants.dart';
 import '../utils/number_formatter.dart';
+import 'package:campsite_finder/generated/l10n.dart';
 
 class CampsiteDetailScreen extends StatelessWidget {
   final Campsite campsite;
@@ -100,7 +100,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                           const Icon(Icons.water, size: 28, color: Colors.blue),
                           const SizedBox(height: 4),
                           Text(
-                            campsite.isCloseToWater ? closeToWaterTitle : 'Not Near Water',
+                            campsite.isCloseToWater ? S.of(context).closeToWaterTitle : S.of(context).notNearWaterTitle,
                             style: labelStyle.copyWith(fontSize: 13, color: black),
                           ),
                         ],
@@ -110,7 +110,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                           const Icon(Icons.local_fire_department, size: 28, color: Colors.orange),
                           const SizedBox(height: 4),
                           Text(
-                            campsite.isCampFireAllowed ? campFireAllowedTitle : 'No Campfire',
+                            campsite.isCampFireAllowed ? S.of(context).campFireAllowedTitle : S.of(context).noCampfireTitle,
                             style: labelStyle.copyWith(fontSize: 13, color: black),
                           ),
                         ],

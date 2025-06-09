@@ -4,6 +4,12 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
+
+
+flutter_intl:
+  enabled: true
+  arb_dir: lib/l10n
+  output_dir: lib/generated
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -30,6 +36,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -37,7 +46,6 @@ dependencies:
   flutter_riverpod: ^2.5.1
   http: ^1.2.1
   cached_network_image: ^3.3.1
-  intl: ^0.19.0
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
   freezed_annotation: ^2.4.1
@@ -62,6 +70,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   mockito: ^5.4.4
   fluttertoast: ^8.2.4
+  intl_utils: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -104,3 +113,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+

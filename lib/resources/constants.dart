@@ -10,3 +10,6 @@ const String maxLabel = 'Max.';
 const String campsitesAppBarTitle = 'Campsites'; 
 const String notNearWaterTitle = 'Not Near Water';
 const String noCampfireTitle = 'No Campfire';
+
+// String constants have been moved to ARB files for localization.
+// Use AppLocalizations.of(context)!.yourKey instead.
