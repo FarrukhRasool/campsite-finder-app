@@ -95,11 +95,26 @@ class _CampsiteInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            (campsite.label).isNotEmpty
-                ? campsite.label[0].toUpperCase() + campsite.label.substring(1)
-                : '',
-            style: headingStyle.copyWith(fontSize: 20, fontWeight: FontWeight.normal),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  (campsite.label).isNotEmpty
+                      ? campsite.label[0].toUpperCase() + campsite.label.substring(1)
+                      : '',
+                  style: headingStyle.copyWith(fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+              ),
+              if (languages.isNotEmpty)
+                Row(
+                  children: [
+                    const Icon(Icons.language, size: 16, color: Colors.purple),
+                    const SizedBox(width: 2),
+                    ...languages,
+                  ],
+                ),
+            ],
           ),
           const SizedBox(height: 8),
           Row(
@@ -116,35 +131,23 @@ class _CampsiteInfo extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              const Icon(Icons.water, size: 18, color: Colors.blue),
+              _SpecPill(
+                icon: Icons.water,
+                label: campsite.isCloseToWater ? closeToWaterTitle : notNearWaterTitle,
+                isActive: campsite.isCloseToWater,
+                activeColor: Colors.blue,
+                small: true,
+              ),
               const SizedBox(width: 6),
-              Text(
-                campsite.isCloseToWater ? closeToWaterTitle : notNearWaterTitle,
-                style: labelStyle.copyWith(fontSize: 14, color: black),
+              _SpecPill(
+                icon: Icons.local_fire_department,
+                label: campsite.isCampFireAllowed ? campFireAllowedTitle : noCampfireTitle,
+                isActive: campsite.isCampFireAllowed,
+                activeColor: Colors.orange,
+                small: true,
               ),
             ],
           ),
-          const SizedBox(height: 4),
-          Row(
-            children: [
-              const Icon(Icons.local_fire_department, size: 18, color: Colors.orange),
-              const SizedBox(width: 6),
-              Text(
-                campsite.isCampFireAllowed ? campFireAllowedTitle : noCampfireTitle,
-                style: labelStyle.copyWith(fontSize: 14, color: black),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          if (languages.isNotEmpty)
-            Row(
-              children: [
-                const Icon(Icons.language, size: 18, color: Colors.purple),
-                const SizedBox(width: 6),
-                const Text(speakingLanguageTitle, style: labelStyle),
-                ...languages,
-              ],
-            ),
           if (campsite.suitableFor.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 4),
@@ -183,6 +186,61 @@ class _CampsiteInfo extends StatelessWidget {
         );
       }
     }).toList();
+  }
+}
+
+class _SpecPill extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isActive;
+  final Color activeColor;
+  final bool small;
+
+  const _SpecPill({
+    required this.icon,
+    required this.label,
+    required this.isActive,
+    required this.activeColor,
+    this.small = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final double iconSize = small ? 14 : 18;
+    final double fontSize = small ? 12 : 14;
+    final EdgeInsets padding = small
+        ? const EdgeInsets.symmetric(horizontal: 8, vertical: 3)
+        : const EdgeInsets.symmetric(horizontal: 12, vertical: 6);
+    return Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.white : grey300.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isActive ? activeColor : grey300,
+          width: 1.1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            size: iconSize,
+            color: isActive ? activeColor : grey300,
+          ),
+          const SizedBox(width: 4),
+          Text(
+            label,
+            style: labelStyle.copyWith(
+              color: isActive ? activeColor : grey300,
+              fontWeight: FontWeight.w600,
+              fontSize: fontSize,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
