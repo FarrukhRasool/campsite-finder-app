@@ -4,7 +4,7 @@ import '../../resources/text_styles.dart';
 import '../../resources/colors.dart';
 import '../../utils/number_formatter.dart';
 import 'spec_pill.dart';
-import 'package:campsite_finder/generated/l10n.dart';
+import 'package:campsite_finder/l10n/app_localizations.dart';
 
 class CampsiteInfo extends StatelessWidget {
   final Campsite campsite;
@@ -58,7 +58,7 @@ class CampsiteInfo extends StatelessWidget {
             children: [
               SpecPill(
                 icon: Icons.water,
-                label: campsite.isCloseToWater ? S.of(context).closeToWaterTitle : S.of(context).notNearWaterTitle,
+                label: campsite.isCloseToWater ? AppLocalizations.of(context)!.closeToWaterTitle : AppLocalizations.of(context)!.notNearWaterTitle,
                 isActive: campsite.isCloseToWater,
                 activeColor: Colors.blue,
                 small: true,
@@ -66,7 +66,7 @@ class CampsiteInfo extends StatelessWidget {
               const SizedBox(width: 6),
               SpecPill(
                 icon: Icons.local_fire_department,
-                label: campsite.isCampFireAllowed ? S.of(context).campFireAllowedTitle : S.of(context).noCampfireTitle,
+                label: campsite.isCampFireAllowed ? AppLocalizations.of(context)!.campFireAllowedTitle : AppLocalizations.of(context)!.noCampfireTitle,
                 isActive: campsite.isCampFireAllowed,
                 activeColor: Colors.orange,
                 small: true,

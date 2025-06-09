@@ -8,7 +8,7 @@ import 'price_box.dart';
 import 'price_slider.dart';
 import 'toggle_switch.dart';
 import 'header.dart';
-import 'package:campsite_finder/generated/l10n.dart';
+import 'package:campsite_finder/l10n/app_localizations.dart';
 
 class CampsiteFilterBottomSheet extends ConsumerWidget {
   final CampsiteFilters filters;
@@ -28,6 +28,7 @@ class CampsiteFilterBottomSheet extends ConsumerWidget {
     final selectedLanguages = currentFilters.speakingLanguages ?? [];
     final selectedMin = currentFilters.minPrice ?? 0.0;
     final selectedMax = currentFilters.maxPrice ?? 100000.0;
+    final l10n = AppLocalizations.of(context)!;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -43,17 +44,17 @@ class CampsiteFilterBottomSheet extends ConsumerWidget {
           Header(onClose: () => Navigator.pop(context)),
           const SizedBox(height: 24),
           ToggleSwitch(
-            title: S.of(context).closeToWaterTitle,
+            title: l10n.closeToWaterTitle,
             value: currentFilters.isCloseToWater ?? false,
             onChanged: (val) => _updateFilter(ref, currentFilters.copyWith(isCloseToWater: val)),
           ),
           ToggleSwitch(
-            title: S.of(context).campFireAllowedTitle,
+            title: l10n.campFireAllowedTitle,
             value: currentFilters.isCampFireAllowed ?? false,
             onChanged: (val) => _updateFilter(ref, currentFilters.copyWith(isCampFireAllowed: val)),
           ),
           const SizedBox(height: 16),
-          Text(S.of(context).priceRangeTitle, style: sectionHeadingStyle),
+          Text(l10n.priceRangeTitle, style: sectionHeadingStyle),
           PriceSlider(
             selectedMin: selectedMin,
             selectedMax: selectedMax,
@@ -63,12 +64,12 @@ class CampsiteFilterBottomSheet extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PriceBox(label: S.of(context).minLabel, value: selectedMin.toStringAsFixed(0)),
-              PriceBox(label: S.of(context).maxLabel, value: selectedMax.toStringAsFixed(0)),
+              PriceBox(label: l10n.minLabel, value: selectedMin.toStringAsFixed(0)),
+              PriceBox(label: l10n.maxLabel, value: selectedMax.toStringAsFixed(0)),
             ],
           ),
           const SizedBox(height: 16),
-          Text(S.of(context).speakingLanguageTitle, style: sectionHeadingStyle),
+          Text(l10n.speakingLanguageTitle, style: sectionHeadingStyle),
           Wrap(
             spacing: 8,
             children: availableLanguages.map((lang) {
@@ -96,7 +97,7 @@ class CampsiteFilterBottomSheet extends ConsumerWidget {
                 _updateFilter(ref, CampsiteFilters());
                 Navigator.pop(context);
               },
-              child: Text(S.of(context).resetFiltersLabel, style: TextStyle(fontFamily: 'Arial', fontSize: 16)),
+              child: Text(l10n.resetFiltersLabel, style: TextStyle(fontFamily: 'Arial', fontSize: 16)),
             ),
           ),
           const SizedBox(height: 24),

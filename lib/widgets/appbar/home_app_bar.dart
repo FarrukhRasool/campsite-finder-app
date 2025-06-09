@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import '../../resources/constants.dart';
-import 'package:campsite_finder/generated/l10n.dart';
+import 'package:campsite_finder/l10n/app_localizations.dart';
 
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,13 +13,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AppBar(
       leading: IconButton(
         icon: const Icon(Icons.filter_list),
         onPressed: onFilterPressed,
       ),
       title: Text(
-        S.of(context).campsitesAppBarTitle,
+        l10n.campsitesAppBarTitle,
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       ),
     );
