@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "filterCampsitesTitle": "Filter Campsites",
+  "priceRangeTitle": "Price Range",
+  "closeToWaterTitle": "Close to Water",
+  "campFireAllowedTitle": "Camp Fire Allowed",
+  "speakingLanguageTitle": "Speaking Language",
+  "resetFiltersLabel": "Reset Filters",
+  "minLabel": "Min.",
+  "maxLabel": "Max.",
+  "campsitesAppBarTitle": "Campsites",
+  "notNearWaterTitle": "Not Near Water",
+  "noCampfireTitle": "No Campfire"
+} 
