@@ -5,6 +5,7 @@ import 'package:campsite_finder/l10n/app_localizations.dart';
 import 'screens/home_screen.dart';
 import 'resources/theme.dart';
 import 'providers/language_provider.dart';
+import 'providers/theme_provider.dart';
 
 void main() {
   runApp(
@@ -20,10 +21,13 @@ class CampsiteFinderApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedLocale = ref.watch(languageProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
       title: 'Campsite Finder',
       theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeMode,
       locale: Locale(selectedLocale),
       localizationsDelegates: const [
         AppLocalizations.delegate,
