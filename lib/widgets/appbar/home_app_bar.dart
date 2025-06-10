@@ -73,21 +73,6 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 ],
               ),
             ),
-            PopupMenuItem<ThemeMode>(
-              value: ThemeMode.system,
-              height: 36,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.brightness_auto, size: 20),
-                  const SizedBox(width: 8),
-                  Text('System Theme', style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: currentThemeMode == ThemeMode.system ? FontWeight.bold : FontWeight.normal,
-                  )),
-                ],
-              ),
-            ),
           ],
         ),
         // Language Selector
