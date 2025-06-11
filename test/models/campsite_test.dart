@@ -1,64 +1,140 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:campsite_finder/providers/campsite_provider.dart';
 import 'package:campsite_finder/models/campsite.dart';
+import 'package:campsite_finder/services/campsite_service.dart';
 
 void main() {
-  group('Campsite Model Tests', () {
-    test('should create a Campsite from JSON', () {
-      final json = {
-        'id': '1',
-        'label': 'Test Campsite',
-        'geoLocation': {
-          'lat': 48.8566,
-          'lng': 2.3522,
-        },
-        'country': 'France',
-        'closeToWater': true,
-        'campFireAllowed': false,
-        'hostLanguage': 'English',
-        'pricePerNight': 25.0,
-        'photo': 'https://example.com/photo.jpg',
-      };
-
-      final campsite = Campsite.fromJson(json);
-
-      expect(campsite.id, '1');
-      expect(campsite.label, 'Test Campsite');
-      expect(campsite.geoLocation.lat, 48.8566);
-      expect(campsite.geoLocation.lng, 2.3522);
-      expect(campsite.country, 'France');
-      expect(campsite.closeToWater, true);
-      expect(campsite.campFireAllowed, false);
-      expect(campsite.hostLanguage, 'English');
-      expect(campsite.pricePerNight, 25.0);
-      expect(campsite.photo, 'https://example.com/photo.jpg');
+  group('Campsite API & Filter Tests', () {
+    test('API returns a list of campsites', () async {
+      final service = CampsiteService();
+      final campsites = await service.getCampsites();
+      expect(campsites, isA<List<Campsite>>());
+      expect(campsites.isNotEmpty, true);
     });
 
-    test('should convert Campsite to JSON', () {
-      final campsite = Campsite(
-        id: '1',
-        label: 'Test Campsite',
-        geoLocation: const GeoLocation(lat: 48.8566, lng: 2.3522),
-        country: 'France',
-        closeToWater: true,
-        campFireAllowed: false,
-        hostLanguage: 'English',
-        pricePerNight: 25.0,
-        photo: 'https://example.com/photo.jpg',
-      );
+    test('Filter: Close to Water', () async {
+      final container = ProviderContainer(overrides: [
+        campsitesProvider.overrideWith((ref) => Future.value([
+          Campsite(
+            id: '1',
+            label: 'A',
+            geoLocation: GeoLocation(lat: 1, lng: 1),
+            isCloseToWater: true,
+            isCampFireAllowed: true,
+            hostLanguages: ['en'],
+            pricePerNight: 10,
+            photo: '',
+          ),
+          Campsite(
+            id: '2',
+            label: 'B',
+            geoLocation: GeoLocation(lat: 2, lng: 2),
+            isCloseToWater: false,
+            isCampFireAllowed: true,
+            hostLanguages: ['en'],
+            pricePerNight: 20,
+            photo: '',
+          ),
+        ])),
+        campsiteFiltersProvider.overrideWith((ref) => CampsiteFilters(isCloseToWater: true)),
+      ]);
+      final filtered = container.read(filteredCampsitesProvider);
+      expect(filtered.length, 1);
+      expect(filtered.first.isCloseToWater, true);
+    });
 
-      final json = campsite.toJson();
+    test('Filter: Campfire Allowed', () async {
+      final container = ProviderContainer(overrides: [
+        campsitesProvider.overrideWith((ref) => Future.value([
+          Campsite(
+            id: '1',
+            label: 'A',
+            geoLocation: GeoLocation(lat: 1, lng: 1),
+            isCloseToWater: true,
+            isCampFireAllowed: false,
+            hostLanguages: ['en'],
+            pricePerNight: 10,
+            photo: '',
+          ),
+          Campsite(
+            id: '2',
+            label: 'B',
+            geoLocation: GeoLocation(lat: 2, lng: 2),
+            isCloseToWater: true,
+            isCampFireAllowed: true,
+            hostLanguages: ['en'],
+            pricePerNight: 20,
+            photo: '',
+          ),
+        ])),
+        campsiteFiltersProvider.overrideWith((ref) => CampsiteFilters(isCampFireAllowed: true)),
+      ]);
+      final filtered = container.read(filteredCampsitesProvider);
+      expect(filtered.length, 1);
+      expect(filtered.first.isCampFireAllowed, true);
+    });
 
-      expect(json['id'], '1');
-      expect(json['label'], 'Test Campsite');
-      final geoLocationJson = (json['geoLocation'] as GeoLocation).toJson();
-      expect(geoLocationJson['lat'], 48.8566);
-      expect(geoLocationJson['lng'], 2.3522);
-      expect(json['country'], 'France');
-      expect(json['closeToWater'], true);
-      expect(json['campFireAllowed'], false);
-      expect(json['hostLanguage'], 'English');
-      expect(json['pricePerNight'], 25.0);
-      expect(json['photo'], 'https://example.com/photo.jpg');
+    test('Filter: Price Range', () async {
+      final container = ProviderContainer(overrides: [
+        campsitesProvider.overrideWith((ref) => Future.value([
+          Campsite(
+            id: '1',
+            label: 'A',
+            geoLocation: GeoLocation(lat: 1, lng: 1),
+            isCloseToWater: true,
+            isCampFireAllowed: true,
+            hostLanguages: ['en'],
+            pricePerNight: 10,
+            photo: '',
+          ),
+          Campsite(
+            id: '2',
+            label: 'B',
+            geoLocation: GeoLocation(lat: 2, lng: 2),
+            isCloseToWater: true,
+            isCampFireAllowed: true,
+            hostLanguages: ['en'],
+            pricePerNight: 50,
+            photo: '',
+          ),
+        ])),
+        campsiteFiltersProvider.overrideWith((ref) => CampsiteFilters(minPrice: 15, maxPrice: 60)),
+      ]);
+      final filtered = container.read(filteredCampsitesProvider);
+      expect(filtered.length, 1);
+      expect(filtered.first.pricePerNight, 50);
+    });
+
+    test('Filter: Host Languages', () async {
+      final container = ProviderContainer(overrides: [
+        campsitesProvider.overrideWith((ref) => Future.value([
+          Campsite(
+            id: '1',
+            label: 'A',
+            geoLocation: GeoLocation(lat: 1, lng: 1),
+            isCloseToWater: true,
+            isCampFireAllowed: true,
+            hostLanguages: ['en'],
+            pricePerNight: 10,
+            photo: '',
+          ),
+          Campsite(
+            id: '2',
+            label: 'B',
+            geoLocation: GeoLocation(lat: 2, lng: 2),
+            isCloseToWater: true,
+            isCampFireAllowed: true,
+            hostLanguages: ['de'],
+            pricePerNight: 20,
+            photo: '',
+          ),
+        ])),
+        campsiteFiltersProvider.overrideWith((ref) => CampsiteFilters(speakingLanguages: ['de'])),
+      ]);
+      final filtered = container.read(filteredCampsitesProvider);
+      expect(filtered.length, 1);
+      expect(filtered.first.hostLanguages, contains('de'));
     });
   });
 } 

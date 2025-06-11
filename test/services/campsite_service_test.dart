@@ -46,7 +46,6 @@ void main() {
       expect(campsites.length, 1);
       expect(campsites[0].id, '1');
       expect(campsites[0].label, 'Test Campsite');
-      expect(campsites[0].country, 'France');
     });
 
     test('should throw exception when API call fails', () async {
