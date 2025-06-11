@@ -89,7 +89,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        '/night',
+                        '/${AppLocalizations.of(context)!.night}',
                         style: labelStyle.copyWith(fontSize: 16, color: AppColors.black),
                       ),
                     ],
