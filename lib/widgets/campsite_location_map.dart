@@ -17,7 +17,6 @@ class CampsiteLocationMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('latitude: $latitude, longitude: $longitude');
     return SizedBox(
       height: 200,
       child: FlutterMap(

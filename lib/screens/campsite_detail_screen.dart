@@ -161,9 +161,9 @@ class CampsiteDetailScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: CampsiteLocationMap(
-                latitude: campsite.geoLocation.lat,
-                longitude: campsite.geoLocation.lng,
-              ),
+                latitude: 48.137154,
+                longitude: 11.576124,
+               ),
             ),
             const SizedBox(height: 24),
           ],

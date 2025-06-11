@@ -6,6 +6,7 @@ import 'screens/home_screen.dart';
 import 'resources/theme.dart';
 import 'providers/language_provider.dart';
 import 'providers/theme_provider.dart';
+import 'widgets/campsite_location_map.dart';
 
 void main() {
   runApp(
