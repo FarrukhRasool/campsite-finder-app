@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../resources/colors.dart';
-
+import '../../l10n/app_localizations.dart';
 
 
 class HomeSearchBar extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomeSearchBar extends StatelessWidget {
           focusNode: focusNode,
           style: const TextStyle(fontSize: 15),
           decoration: InputDecoration(
-            hintText: 'Search',
+            hintText: AppLocalizations.of(context)!.search,
             prefixIcon: const Icon(Icons.search, size: 18),
             contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
             filled: true,

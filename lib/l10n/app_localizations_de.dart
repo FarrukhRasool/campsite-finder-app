@@ -52,4 +52,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get thankyou => 'Danke';
+
+  @override
+  String get search => 'Suchen';
 }

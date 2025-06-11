@@ -52,4 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thankyou => 'Thank you';
+
+  @override
+  String get search => 'Search';
 }
