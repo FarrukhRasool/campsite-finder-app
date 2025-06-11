@@ -6,8 +6,8 @@ import '../resources/colors.dart';
 import '../widgets/filter_bottom_sheet/campsite_filter_bottom_sheet.dart';
 import 'campsite_detail_screen.dart';
 import '../widgets/campsitelist/campsite_list.dart';
-import '../widgets/appbar/home_app_bar.dart';
-import '../widgets/appbar/home_search_bar.dart';
+import '../widgets/app_bar/home_app_bar.dart';
+import '../widgets/app_bar/home_search_bar.dart';
 import '../widgets/green_loader.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../widgets/no_internet_screen.dart';
@@ -72,13 +72,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: lightGrey,
+      backgroundColor: AppColors.lightGrey,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => CampsiteFilterBottomSheet(
         filters: filters,
-        darkGreen: darkGreen,
+        darkGreen: AppColors.darkGreen,
         availableLanguages: availableLanguages,
       ),
     );
@@ -124,7 +124,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Container(
-          color: lightGrey,
+          color: AppColors.lightGrey,
           child: Column(
             children: [
               HomeSearchBar(

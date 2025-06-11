@@ -13,14 +13,14 @@ class NoInternetScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.wifi_off, size: 64, color: darkGreen),
+            Icon(Icons.wifi_off, size: 64, color: AppColors.darkGreen),
             const SizedBox(height: 24),
             const Text(
               'No Internet Connection',
               style: TextStyle(
                 fontFamily: 'Arial',
                 fontSize: 20,
-                color: darkGreen,
+                color: AppColors.darkGreen,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -29,7 +29,7 @@ class NoInternetScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: onRetry,
               style: ElevatedButton.styleFrom(
-                backgroundColor: darkGreen,
+                backgroundColor: AppColors.darkGreen,
                 foregroundColor: Colors.white,
               ),
               child: const Text('Retry'),

@@ -27,10 +27,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetFiltersLabel => 'Reset Filters';
 
   @override
-  String get minLabel => 'Min: ';
+  String get minLabel => 'Min €:';
 
   @override
-  String get maxLabel => 'Max: ';
+  String get maxLabel => 'Max €:';
 
   @override
   String get campsitesAppBarTitle => 'Campsites';

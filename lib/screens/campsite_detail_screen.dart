@@ -36,7 +36,7 @@ class CampsiteDetailScreen extends StatelessWidget {
         ? campsite.label[0].toUpperCase() + campsite.label.substring(1)
         : '';
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text(
           name,
@@ -63,8 +63,8 @@ class CampsiteDetailScreen extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     height: 220,
-                    color: grey300,
-                    child: const Icon(Icons.image, size: 60, color: white),
+                    color: AppColors.grey300,
+                    child: const Icon(Icons.image, size: 60, color: AppColors.white),
                   );
                 },
               ),
@@ -84,12 +84,12 @@ class CampsiteDetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         '€${NumberFormatter.formatPrice(campsite.pricePerNight)}',
-                        style: headingStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold, color: black),
+                        style: headingStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.black),
                       ),
                       const SizedBox(width: 4),
                       Text(
                         '/night',
-                        style: labelStyle.copyWith(fontSize: 16, color: black),
+                        style: labelStyle.copyWith(fontSize: 16, color: AppColors.black),
                       ),
                     ],
                   ),
@@ -109,8 +109,8 @@ class CampsiteDetailScreen extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: darkGreen,
-                        foregroundColor: white,
+                        backgroundColor: AppColors.darkGreen,
+                        foregroundColor: AppColors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),
                         ),
@@ -121,7 +121,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                         msg: "Thank you",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
-                        backgroundColor: darkGreen,
+                        backgroundColor: AppColors.darkGreen,
                         textColor: Colors.white,
                         fontSize: 14.0,
   );
@@ -141,7 +141,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                       children: campsite.suitableFor
                           .map((item) => Chip(
                                 label: Text(item),
-                                backgroundColor: grey300.withOpacity(0.2),
+                                backgroundColor: AppColors.grey300.withOpacity(0.2),
                               ))
                           .toList(),
                     ),

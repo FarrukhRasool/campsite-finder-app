@@ -8,7 +8,7 @@ class GreenLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(darkGreen),
+        valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
       ),
     );
   }

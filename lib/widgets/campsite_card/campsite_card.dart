@@ -25,7 +25,7 @@ class CampsiteCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppColors.grey300.withOpacity(0.15),
+            color:  AppColors.grey300.withOpacity(0.15),
             blurRadius: 24,
             spreadRadius: 4,
             offset: const Offset(0, 8),

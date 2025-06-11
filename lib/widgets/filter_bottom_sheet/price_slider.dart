@@ -24,7 +24,7 @@ class PriceSlider extends StatelessWidget {
       divisions: 100,
       onChanged: onChanged,
       activeColor: darkGreen,
-      inactiveColor: lightGrey,
+      inactiveColor: AppColors.grey400,
     );
   }
 }

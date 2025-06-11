@@ -17,14 +17,14 @@ class CampsiteList extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search_off, size: 64, color: grey300),
+            Icon(Icons.search_off, size: 64, color: AppColors.grey300),
             SizedBox(height: 16),
             Text(
               'No Result Found',
               style: TextStyle(
                 fontFamily: 'Arial',
                 fontSize: 20,
-                color: grey300,
+                color: AppColors.grey300,
                 fontWeight: FontWeight.w600,
               ),
             ),

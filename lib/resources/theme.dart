@@ -8,13 +8,13 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.light,
-        seedColor: darkGreen,
-        primary: darkGreen,
-        secondary: darkGreen,
+        seedColor: AppColors.darkGreen,
+        primary: AppColors.darkGreen,
+        secondary: AppColors.darkGreen,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: darkGreen,
-        foregroundColor: white,
+        backgroundColor: AppColors.darkGreen,
+        foregroundColor: AppColors.white,
         elevation: 0,
       ),
     );
@@ -26,13 +26,13 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
-        seedColor: darkGreen,
-        primary: darkGreen,
-        secondary: darkGreen,
+        seedColor: AppColors.darkGreen,
+        primary: AppColors.darkGreen,
+        secondary: AppColors.darkGreen,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.black,
+        foregroundColor: AppColors.white,
         elevation: 0,
       ),
     );

@@ -137,13 +137,13 @@ abstract class AppLocalizations {
   /// No description provided for @minLabel.
   ///
   /// In en, this message translates to:
-  /// **'Min: '**
+  /// **'Min €:'**
   String get minLabel;
 
   /// No description provided for @maxLabel.
   ///
   /// In en, this message translates to:
-  /// **'Max: '**
+  /// **'Max €:'**
   String get maxLabel;
 
   /// No description provided for @campsitesAppBarTitle.

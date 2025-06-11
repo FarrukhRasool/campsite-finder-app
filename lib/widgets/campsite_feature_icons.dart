@@ -58,7 +58,7 @@ class CampsiteFeatureIcons extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
       decoration: BoxDecoration(
-        color: lightGrey,
+        color: AppColors.lightGrey,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -67,7 +67,7 @@ class CampsiteFeatureIcons extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             label,
-            style: labelStyle.copyWith(fontSize: 10, color: black),
+            style: labelStyle.copyWith(fontSize: 10, color: AppColors.black),
           ),
         ],
       ),
