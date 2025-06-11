@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/campsite.dart';
 import '../../resources/text_styles.dart';
-import '../../resources/constants.dart';
 import '../../resources/colors.dart';
 import '../../utils/number_formatter.dart';
 import 'campsite_card_image.dart';

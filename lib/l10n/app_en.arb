@@ -6,8 +6,8 @@
   "campFireAllowedTitle": "Camp Fire Allowed",
   "speakingLanguageTitle": "Speaking Language",
   "resetFiltersLabel": "Reset Filters",
-  "minLabel": "Min.",
-  "maxLabel": "Max.",
+  "minLabel": "Min: ",
+  "maxLabel": "Max: ",
   "campsitesAppBarTitle": "Campsites",
   "notNearWaterTitle": "Not Near Water",
   "noCampfireTitle": "No Campfire"

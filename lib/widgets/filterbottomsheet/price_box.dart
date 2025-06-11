@@ -8,21 +8,20 @@ class PriceBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
+      width: 120,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[400]!),
         borderRadius: BorderRadius.circular(8),
         color: Colors.transparent,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             label,
             style: labelStyle,
           ),
-          const SizedBox(height: 2),
           Text(
             value,
             style: valueStyle,

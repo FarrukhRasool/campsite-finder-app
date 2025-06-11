@@ -7,6 +7,7 @@ import '../resources/colors.dart';
 import '../resources/text_styles.dart';
 import '../utils/number_formatter.dart';
 import 'package:campsite_finder/l10n/app_localizations.dart';
+import '../widgets/campsite_feature_icons.dart';
 
 class CampsiteDetailScreen extends StatelessWidget {
   final Campsite campsite;
@@ -92,61 +93,14 @@ class CampsiteDetailScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-                        decoration: BoxDecoration(
-                          color: lightGrey,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          children: [
-                            const Icon(Icons.water, size: 24, color: Colors.blue),
-                            const SizedBox(height: 2),
-                            Text(
-                              campsite.isCloseToWater ? AppLocalizations.of(context)!.closeToWaterTitle : AppLocalizations.of(context)!.notNearWaterTitle,
-                              style: labelStyle.copyWith(fontSize: 10, color: black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-                        decoration: BoxDecoration(
-                          color: lightGrey,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          children: [
-                            const Icon(Icons.local_fire_department, size: 24, color: Colors.orange),
-                            const SizedBox(height: 2),
-                            Text(
-                              campsite.isCampFireAllowed ? AppLocalizations.of(context)!.campFireAllowedTitle : AppLocalizations.of(context)!.noCampfireTitle,
-                              style: labelStyle.copyWith(fontSize: 10, color: black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-                        decoration: BoxDecoration(
-                          color: lightGrey,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          children: [
-                            const Icon(Icons.language, size: 24, color: Colors.purple),
-                            const SizedBox(height: 2),
-                            Text(
-                              languages,
-                              style: labelStyle.copyWith(fontSize: 10, color: black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  CampsiteFeatureIcons(
+                    isCloseToWater: campsite.isCloseToWater,
+                    isCampFireAllowed: campsite.isCampFireAllowed,
+                    languages: languages,
+                    closeToWaterTitle: AppLocalizations.of(context)!.closeToWaterTitle,
+                    notNearWaterTitle: AppLocalizations.of(context)!.notNearWaterTitle,
+                    campFireAllowedTitle: AppLocalizations.of(context)!.campFireAllowedTitle,
+                    noCampfireTitle: AppLocalizations.of(context)!.noCampfireTitle,
                   ),
                   const SizedBox(height: 24),
                   SizedBox(

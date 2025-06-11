@@ -75,7 +75,7 @@ class CampsiteFilterBottomSheet extends ConsumerWidget {
             children: availableLanguages.map((lang) {
               final isSelected = selectedLanguages.contains(lang['code']);
               return FilterChip(
-                label: Text(lang['label']!, style: labelStyle),
+                label: Text(lang['label']!, style: greenlabelStyle),
                 selected: isSelected,
                 onSelected: (selected) {
                   final newList = List<String>.from(selectedLanguages);

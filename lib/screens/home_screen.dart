@@ -8,6 +8,9 @@ import 'campsite_detail_screen.dart';
 import '../widgets/campsitelist/campsite_list.dart';
 import '../widgets/appbar/home_app_bar.dart';
 import '../widgets/appbar/home_search_bar.dart';
+import '../widgets/green_loader.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import '../widgets/no_internet_screen.dart';
 
 const availableLanguages = [
   {'code': 'en', 'label': 'English'},
@@ -25,6 +28,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   String _searchQuery = '';
   final FocusNode _searchFocusNode = FocusNode();
   final TextEditingController _searchController = TextEditingController();
+
+  bool _hasInternet = true;
+  late final Connectivity _connectivity;
+  late final Stream<ConnectivityResult> _connectivityStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _connectivity = Connectivity();
+    _connectivityStream = _connectivity.onConnectivityChanged;
+    _connectivityStream.listen((result) {
+      final hasInternet = result != ConnectivityResult.none;
+      if (mounted) {
+        setState(() {
+          _hasInternet = hasInternet;
+        });
+      }
+    });
+    _checkInitialConnection();
+  }
+
+  Future<void> _checkInitialConnection() async {
+    final result = await _connectivity.checkConnectivity();
+    if (mounted) {
+      setState(() {
+        _hasInternet = result != ConnectivityResult.none;
+      });
+      if (_hasInternet) {
+        ref.refresh(campsitesProvider);
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -51,14 +86,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final campsites = ref.watch(filteredCampsitesProvider);
+    final campsitesAsync = ref.watch(campsitesProvider);
     final filters = ref.watch(campsiteFiltersProvider);
 
-    final filteredCampsites = _searchQuery.isEmpty
-        ? campsites
-        : campsites
-            .where((c) => c.label.toLowerCase().contains(_searchQuery.toLowerCase()))
-            .toList();
+    if (!_hasInternet) {
+      return Scaffold(
+        appBar: HomeAppBar(onFilterPressed: () => _showFilterBottomSheet(context, ref, filters)),
+        body: NoInternetScreen(
+          onRetry: _checkInitialConnection,
+        ),
+      );
+    }
+
+    Widget content = campsitesAsync.when(
+      data: (campsites) {
+        final filteredCampsites = _searchQuery.isEmpty
+            ? campsites
+            : campsites
+                .where((c) => c.label.toLowerCase().contains(_searchQuery.toLowerCase()))
+                .toList();
+        return CampsiteList(
+          campsites: filteredCampsites,
+          onTap: (campsite) => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => CampsiteDetailScreen(campsite: campsite),
+            ),
+          ),
+        );
+      },
+      loading: () => const GreenLoader(),
+      error: (e, st) => Center(child: Text('Error: $e')),
+    );
 
     return Scaffold(
       appBar: HomeAppBar(onFilterPressed: () => _showFilterBottomSheet(context, ref, filters)),
@@ -73,17 +132,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 focusNode: _searchFocusNode,
                 onChanged: (value) => setState(() => _searchQuery = value),
               ),
-              Expanded(
-                child: CampsiteList(
-                  campsites: filteredCampsites,
-                  onTap: (campsite) => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => CampsiteDetailScreen(campsite: campsite),
-                    ),
-                  ),
-                ),
-              ),
+              Expanded(child: content),
             ],
           ),
         ),

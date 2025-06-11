@@ -21,6 +21,12 @@ const TextStyle labelStyle = TextStyle(
   color: grey300,
 );
 
+const TextStyle greenlabelStyle = TextStyle(
+  fontFamily: 'Arial',
+  fontSize: 14,
+  color: darkGreen,
+);
+
 const TextStyle blacklabelStyle = TextStyle(
   fontFamily: 'Arial',
   fontSize: 14,

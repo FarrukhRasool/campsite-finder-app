@@ -53,7 +53,7 @@ class CampsiteInfo extends StatelessWidget {
               Text('/night', style: labelStyle.copyWith(fontSize: 16, color: black)),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Row(
             children: [
               SpecPill(
