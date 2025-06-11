@@ -181,6 +181,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'night'**
   String get night;
+
+  /// No description provided for @thankyou.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you'**
+  String get thankyou;
 }
 
 class _AppLocalizationsDelegate

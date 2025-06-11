@@ -119,7 +119,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         Fluttertoast.showToast(
-                        msg: "Thank you",
+                        msg: AppLocalizations.of(context)!.thankyou,
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
                         backgroundColor: AppColors.darkGreen,

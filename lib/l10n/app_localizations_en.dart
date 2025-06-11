@@ -49,4 +49,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get night => 'night';
+
+  @override
+  String get thankyou => 'Thank you';
 }
