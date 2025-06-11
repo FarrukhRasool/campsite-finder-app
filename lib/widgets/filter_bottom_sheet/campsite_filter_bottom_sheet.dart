@@ -68,8 +68,9 @@ class CampsiteFilterBottomSheet extends ConsumerWidget {
               PriceBox(label: l10n.maxLabel, value: selectedMax.toStringAsFixed(0)),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Text(l10n.speakingLanguageTitle, style: sectionHeadingStyle),
+          const SizedBox(height: 16),
           Wrap(
             spacing: 8,
             children: availableLanguages.map((lang) {

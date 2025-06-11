@@ -50,9 +50,9 @@ class CampsiteInfo extends StatelessWidget {
                 style: headingStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.black),
               ),
               const SizedBox(width: 4),
-              Text('/night', style: labelStyle.copyWith(fontSize: 16, color: AppColors.black)),
+              Text('/${AppLocalizations.of(context)!.night}', style: labelStyle.copyWith(fontSize: 16, color: AppColors.black)),
             ],
-          ),
+          ), 
           const SizedBox(height: 12),
           Row(
             children: [

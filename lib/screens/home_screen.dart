@@ -87,6 +87,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final campsitesAsync = ref.watch(campsitesProvider);
+    final filteredCampsites = ref.watch(filteredCampsitesProvider);
     final filters = ref.watch(campsiteFiltersProvider);
 
     if (!_hasInternet) {
@@ -99,14 +100,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     Widget content = campsitesAsync.when(
-      data: (campsites) {
-        final filteredCampsites = _searchQuery.isEmpty
-            ? campsites
-            : campsites
+      data: (_) {
+        final searchResults = _searchQuery.isEmpty
+            ? filteredCampsites
+            : filteredCampsites
                 .where((c) => c.label.toLowerCase().contains(_searchQuery.toLowerCase()))
                 .toList();
         return CampsiteList(
-          campsites: filteredCampsites,
+          campsites: searchResults,
           onTap: (campsite) => Navigator.push(
             context,
             MaterialPageRoute(

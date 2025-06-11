@@ -46,4 +46,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get booknow => 'Jetzt Buchen';
+
+  @override
+  String get night => 'nacht';
 }

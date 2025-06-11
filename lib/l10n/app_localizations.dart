@@ -175,6 +175,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Book Now'**
   String get booknow;
+
+  /// No description provided for @night.
+  ///
+  /// In en, this message translates to:
+  /// **'night'**
+  String get night;
 }
 
 class _AppLocalizationsDelegate

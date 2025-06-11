@@ -9,6 +9,7 @@ import '../utils/number_formatter.dart';
 import 'package:campsite_finder/l10n/app_localizations.dart';
 import '../widgets/campsite_feature_icons.dart';
 import '../widgets/campsite_location_map.dart';
+import '../l10n/app_localizations.dart';
 
 class CampsiteDetailScreen extends StatelessWidget {
   final Campsite campsite;
@@ -126,7 +127,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                         fontSize: 14.0,
   );
                       },
-                      child: const Text('Book Now'),
+                      child: Text(AppLocalizations.of(context)!.booknow),
                     ),
                   ),
                   if (campsite.suitableFor.isNotEmpty) ...[
@@ -153,7 +154,7 @@ class CampsiteDetailScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Location',
+                AppLocalizations.of(context)!.location,
                 style: sectionHeadingStyle,
               ),
             ),
