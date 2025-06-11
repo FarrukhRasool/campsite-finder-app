@@ -57,7 +57,7 @@ class CampsiteDetailScreen extends StatelessWidget {
           children: [
             ClipRRect(
               child: Image.network(
-                campsite.photo,
+                campsite.photo.replaceFirst('http://', 'https://'),
                 height: 220,
                 width: double.infinity,
                 fit: BoxFit.cover,

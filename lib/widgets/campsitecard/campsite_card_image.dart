@@ -16,7 +16,7 @@ class CampsiteImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       child: Image.network(
-        photoUrl ?? '',
+        photoUrl?.replaceFirst('http://', 'https://') ?? '',
         height: 180,
         width: double.infinity,
         fit: BoxFit.cover,
