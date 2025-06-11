@@ -28,7 +28,7 @@ A Flutter application for finding and exploring campsites. This app allows users
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/campsite_finder.git
+git clone https://github.com/FarrukhRasool/campsite_finder.git
 ```
 
 2. Navigate to the project directory:
@@ -76,15 +76,3 @@ The app uses a mock API endpoint for campsite data:
 ```
 https://62ed0389a785760e67622eb2.mockapi.io/spots/v1/campsites
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
