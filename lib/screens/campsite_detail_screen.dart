@@ -34,7 +34,7 @@ class CampsiteDetailScreen extends StatelessWidget {
         ? campsite.label[0].toUpperCase() + campsite.label.substring(1)
         : '';
     return Scaffold(
-      backgroundColor: lightGrey,
+      backgroundColor: white,
       appBar: AppBar(
         title: Text(
           name,
@@ -95,35 +95,56 @@ class CampsiteDetailScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                          const Icon(Icons.water, size: 28, color: Colors.blue),
-                          const SizedBox(height: 4),
-                          Text(
-                            campsite.isCloseToWater ? AppLocalizations.of(context)!.closeToWaterTitle : AppLocalizations.of(context)!.notNearWaterTitle,
-                            style: labelStyle.copyWith(fontSize: 13, color: black),
-                          ),
-                        ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                        decoration: BoxDecoration(
+                          color: lightGrey,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: [
+                            const Icon(Icons.water, size: 24, color: Colors.blue),
+                            const SizedBox(height: 2),
+                            Text(
+                              campsite.isCloseToWater ? AppLocalizations.of(context)!.closeToWaterTitle : AppLocalizations.of(context)!.notNearWaterTitle,
+                              style: labelStyle.copyWith(fontSize: 10, color: black),
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          const Icon(Icons.local_fire_department, size: 28, color: Colors.orange),
-                          const SizedBox(height: 4),
-                          Text(
-                            campsite.isCampFireAllowed ? AppLocalizations.of(context)!.campFireAllowedTitle : AppLocalizations.of(context)!.noCampfireTitle,
-                            style: labelStyle.copyWith(fontSize: 13, color: black),
-                          ),
-                        ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                        decoration: BoxDecoration(
+                          color: lightGrey,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: [
+                            const Icon(Icons.local_fire_department, size: 24, color: Colors.orange),
+                            const SizedBox(height: 2),
+                            Text(
+                              campsite.isCampFireAllowed ? AppLocalizations.of(context)!.campFireAllowedTitle : AppLocalizations.of(context)!.noCampfireTitle,
+                              style: labelStyle.copyWith(fontSize: 10, color: black),
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          const Icon(Icons.language, size: 28, color: Colors.purple),
-                          const SizedBox(height: 4),
-                          Text(
-                            languages,
-                            style: labelStyle.copyWith(fontSize: 13, color: black),
-                          ),
-                        ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+                        decoration: BoxDecoration(
+                          color: lightGrey,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: [
+                            const Icon(Icons.language, size: 24, color: Colors.purple),
+                            const SizedBox(height: 2),
+                            Text(
+                              languages,
+                              style: labelStyle.copyWith(fontSize: 10, color: black),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
