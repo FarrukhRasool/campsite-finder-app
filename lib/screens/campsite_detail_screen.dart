@@ -8,6 +8,7 @@ import '../resources/text_styles.dart';
 import '../utils/number_formatter.dart';
 import 'package:campsite_finder/l10n/app_localizations.dart';
 import '../widgets/campsite_feature_icons.dart';
+import '../widgets/campsite_location_map.dart';
 
 class CampsiteDetailScreen extends StatelessWidget {
   final Campsite campsite;
@@ -159,40 +160,9 @@ class CampsiteDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                height: 200,
-                child: FlutterMap(
-                  options: MapOptions(
-                    center: LatLng(
-                      campsite.geoLocation.lat,
-                      campsite.geoLocation.lng,
-                    ),
-                    zoom: 13.0,
-                  ),
-                  children: [
-                    TileLayer(
-                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      userAgentPackageName: 'com.example.campsite_finder',
-                    ),
-                    MarkerLayer(
-                      markers: [
-                        Marker(
-                          point: LatLng(
-                            campsite.geoLocation.lat,
-                            campsite.geoLocation.lng,
-                          ),
-                          width: 80,
-                          height: 80,
-                          child: const Icon(
-                            Icons.location_on,
-                            color: Colors.red,
-                            size: 40,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              child: CampsiteLocationMap(
+                latitude: campsite.geoLocation.lat,
+                longitude: campsite.geoLocation.lng,
               ),
             ),
             const SizedBox(height: 24),

@@ -40,4 +40,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noCampfireTitle => 'No Campfire';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get booknow => 'Book Now';
 }

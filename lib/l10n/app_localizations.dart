@@ -163,6 +163,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Campfire'**
   String get noCampfireTitle;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @booknow.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Now'**
+  String get booknow;
 }
 
 class _AppLocalizationsDelegate

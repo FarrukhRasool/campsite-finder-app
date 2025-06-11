@@ -10,5 +10,7 @@
   "maxLabel": "Max: ",
   "campsitesAppBarTitle": "Campsites",
   "notNearWaterTitle": "Not Near Water",
-  "noCampfireTitle": "No Campfire"
+  "noCampfireTitle": "No Campfire",
+  "location": "Location",
+  "booknow": "Book Now"
 } 

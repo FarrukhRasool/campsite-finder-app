@@ -15,7 +15,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get priceRangeTitle => 'Preisbereich';
 
   @override
-  String get closeToWaterTitle => 'Nah am Wasser';
+  String get closeToWaterTitle => 'Nicht Wasser';
 
   @override
   String get campFireAllowedTitle => 'Lagerfeuer erlaubt';
@@ -36,8 +36,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get campsitesAppBarTitle => 'Campsites';
 
   @override
-  String get notNearWaterTitle => 'Nicht nah am Wasser';
+  String get notNearWaterTitle => 'Nicht Wasser';
 
   @override
   String get noCampfireTitle => 'Kein Lagerfeuer';
+
+  @override
+  String get location => 'Ort';
+
+  @override
+  String get booknow => 'Jetzt Buchen';
 }
