@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/campsite.dart';
 import '../providers/campsite_provider.dart';
 import '../resources/colors.dart';
-import '../widgets/filterbottomsheet/campsite_filter_bottom_sheet.dart';
+import '../widgets/filter_bottom_sheet/campsite_filter_bottom_sheet.dart';
 import 'campsite_detail_screen.dart';
 import '../widgets/campsitelist/campsite_list.dart';
 import '../widgets/appbar/home_app_bar.dart';

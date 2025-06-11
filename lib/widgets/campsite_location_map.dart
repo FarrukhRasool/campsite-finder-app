@@ -17,6 +17,7 @@ class CampsiteLocationMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('latitude: $latitude, longitude: $longitude');
     return SizedBox(
       height: 200,
       child: FlutterMap(
@@ -26,8 +27,9 @@ class CampsiteLocationMap extends StatelessWidget {
         ),
         children: [
           TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.campsite_finder',
+            subdomains: ['a', 'b', 'c'],
           ),
           MarkerLayer(
             markers: [

@@ -24,6 +24,7 @@ class CampsiteFinderApp extends ConsumerWidget {
     final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Campsite Finder',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

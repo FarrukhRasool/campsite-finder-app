@@ -27,20 +27,28 @@ class CampsiteFeatureIcons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _featureItem(
-          icon: Icons.water,
-          iconColor: Colors.blue,
-          label: isCloseToWater ? closeToWaterTitle : notNearWaterTitle,
+        Expanded(
+          child: _featureItem(
+            icon: Icons.water,
+            iconColor: Colors.blue,
+            label: isCloseToWater ? closeToWaterTitle : notNearWaterTitle,
+          ),
         ),
-        _featureItem(
-          icon: Icons.local_fire_department,
-          iconColor: Colors.orange,
-          label: isCampFireAllowed ? campFireAllowedTitle : noCampfireTitle,
+        const SizedBox(width: 8),
+        Expanded(
+          child: _featureItem(
+            icon: Icons.local_fire_department,
+            iconColor: Colors.orange,
+            label: isCampFireAllowed ? campFireAllowedTitle : noCampfireTitle,
+          ),
         ),
-        _featureItem(
-          icon: Icons.language,
-          iconColor: Colors.purple,
-          label: languages,
+        const SizedBox(width: 8),
+        Expanded(
+          child: _featureItem(
+            icon: Icons.language,
+            iconColor: Colors.purple,
+            label: languages,
+          ),
         ),
       ],
     );
@@ -48,7 +56,7 @@ class CampsiteFeatureIcons extends StatelessWidget {
 
   Widget _featureItem({required IconData icon, required Color iconColor, required String label}) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
       decoration: BoxDecoration(
         color: lightGrey,
         borderRadius: BorderRadius.circular(16),
